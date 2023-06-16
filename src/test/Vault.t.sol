@@ -31,7 +31,9 @@ contract VaultTest is DSTest {
 
         // This level needs to load a private variable from a storage slot
         // Use vm.load()
-
+        bytes32 password = vm.load(levelAddress, bytes32(uint256(1)));
+        ethernautVault.unlock(password);
+        assertTrue(!(ethernautVault.locked()));
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
