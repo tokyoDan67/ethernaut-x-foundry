@@ -31,6 +31,8 @@ contract FalloutTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        ethernautFallout.Fal1out();
+        assertEq(ethernautFallout.owner(), eoaAddress, "Wrong owner");
 
         //////////////////////
         // LEVEL SUBMISSION //
