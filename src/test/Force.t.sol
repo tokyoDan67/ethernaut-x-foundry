@@ -1,7 +1,6 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../Force/ForceHack.sol";
 import "../Force/ForceFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -34,10 +33,6 @@ contract ForceTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
-
-        // Create the attacking contract which will self destruct and send ether to the Force contract
-        ForceHack forceHack = (new ForceHack){value: 0.1 ether}(payable(levelAddress));
-
 
         //////////////////////
         // LEVEL SUBMISSION //

@@ -1,7 +1,6 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../Elevator/ElevatorHack.sol";
 import "../Elevator/ElevatorFactory.sol";
 import "../Ethernaut.sol";
 
@@ -22,17 +21,6 @@ contract ElevatorTest is DSTest {
         ethernaut.registerLevel(elevatorFactory);
         address levelAddress = ethernaut.createLevelInstance(elevatorFactory);
         Elevator ethernautElevator = Elevator(payable(levelAddress));
-
-        //////////////////
-        // LEVEL ATTACK //
-        //////////////////
-
-        // Create ElevatorHack contract
-        ElevatorHack elevatorHack = new ElevatorHack(levelAddress);
-
-        // Call the attack function
-        elevatorHack.attack();
-
 
         //////////////////////
         // LEVEL SUBMISSION //

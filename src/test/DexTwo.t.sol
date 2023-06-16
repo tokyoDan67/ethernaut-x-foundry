@@ -1,7 +1,6 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../DexTwo/DexTwoHack.sol";
 import "../DexTwo/DexTwoFactory.sol";
 import "../Ethernaut.sol";
 
@@ -26,16 +25,6 @@ contract DexTwoTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
-
-        // Create DexTwoHack Contract
-        DexTwoHack dexTwoHack = new DexTwoHack(ethernautDexTwo);
-        
-        // give the attack contract the balance
-        IERC20(ethernautDexTwo.token1()).transfer(address(dexTwoHack), IERC20(ethernautDexTwo.token1()).balanceOf(address(this)));
-        IERC20(ethernautDexTwo.token2()).transfer(address(dexTwoHack), IERC20(ethernautDexTwo.token2()).balanceOf(address(this)));
-
-        // Call the attack function
-        dexTwoHack.attack();
 
         //////////////////////
         // LEVEL SUBMISSION //

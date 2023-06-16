@@ -1,7 +1,6 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../Denial/DenialHack.sol";
 import "../Denial/DenialFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -33,12 +32,6 @@ contract DenialTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
-
-        // Create DenialHack Contract
-        DenialHack denialHack = new DenialHack();
-        
-        // set withdraw parter. callback function will waste all pased gas when admin calls "withdraw"
-        ethernautDenial.setWithdrawPartner(address(denialHack));
 
         //////////////////////
         // LEVEL SUBMISSION //

