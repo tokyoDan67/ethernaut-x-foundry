@@ -1,7 +1,7 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../CoinFlip/CoinFlipHack.sol";
+import "../CoinFlip/CoinFlipHackDan.sol";
 import "../CoinFlip/CoinFlipFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -29,6 +29,16 @@ contract CoinFlipTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        CoinFlipHackDan hack = new CoinFlipHackDan();
+
+        for (uint256 i; i < 10; ++i) {
+            bool guess = hack.getCorrectFlip();
+            ethernautCoinFlip.flip(guess);
+            vm.roll(block.number + 1);
+            assertEq(ethernautCoinFlip.consecutiveWins(), (i + 1), "Guess was wrong");
+        }
+
+        assertEq(ethernautCoinFlip.consecutiveWins(), 10, "Wrong consecutive wins");
 
         //////////////////////
         // LEVEL SUBMISSION //
