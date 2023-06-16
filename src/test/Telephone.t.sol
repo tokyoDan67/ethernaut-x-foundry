@@ -1,7 +1,7 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../Telephone/TelephoneHack.sol";
+import "../Telephone/TelephoneHackDan.sol";
 import "../Telephone/TelephoneFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -31,6 +31,10 @@ contract TelephoneTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        TelephoneHackDan hack = new TelephoneHackDan(levelAddress);
+        hack.hackTelephone();
+
+        assertEq(ethernautTelephone.owner(), tx.origin, "Wrong owner");
 
         //////////////////////
         // LEVEL SUBMISSION //
