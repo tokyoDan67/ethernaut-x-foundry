@@ -1,7 +1,7 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../King/KingHack.sol";
+import "../King/KingHackDan.sol";
 import "../King/KingFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -32,6 +32,11 @@ contract KingTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        KingHackDan hack = new KingHackDan(levelAddress);
+        hack.pwnKing{value: 1 ether}();
+
+        assertEq(ethernautKing._king(), address(hack), "Wrong king");
+        assertEq(ethernautKing.prize(), 1 ether, "Wrong prize");
 
         //////////////////////
         // LEVEL SUBMISSION //
