@@ -14,8 +14,6 @@ contract PrivacyTest is DSTest {
         ethernaut = new Ethernaut();
     }
 
-    // This level passes despite the level attack being deleted...
-
     function testPrivacyHack() public {
         /////////////////
         // LEVEL SETUP //
@@ -30,6 +28,9 @@ contract PrivacyTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        bytes32 key = vm.load(levelAddress, bytes32(uint256(5)));
+        ethernautPrivacy.unlock(bytes16(key));
+        assertTrue(!(ethernautPrivacy.locked()), "Still locked");
 
         //////////////////////
         // LEVEL SUBMISSION //
