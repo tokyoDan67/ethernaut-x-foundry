@@ -1,7 +1,7 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../Reentrance/ReentranceHack.sol";
+import "../Reentrance/ReentranceHackDan.sol";
 import "../Reentrance/ReentranceFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -32,6 +32,13 @@ contract ReentranceTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        ReentranceHackDan hack = new ReentranceHackDan{value: 1 ether}(levelAddress);
+
+        assertEq(address(hack).balance, 1 ether, "Wrong hack balance");
+
+        hack.pwnContract();
+
+        assertEq(levelAddress.balance, 0, "Didn't fully drain balance");
 
         //////////////////////
         // LEVEL SUBMISSION //
