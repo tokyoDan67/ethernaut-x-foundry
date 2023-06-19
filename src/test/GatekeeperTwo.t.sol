@@ -1,7 +1,7 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../GatekeeperTwo/GatekeeperTwoHack.sol";
+import "../GatekeeperTwo/GatekeeperTwoHackDan.sol";
 import "../GatekeeperTwo/GatekeeperTwoFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -30,6 +30,7 @@ contract GatekeeperTwoTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        GatekeeperTwoHackDan hack = new GatekeeperTwoHackDan(levelAddress);
 
         //////////////////////
         // LEVEL SUBMISSION //
